@@ -18,7 +18,8 @@ import javax.swing.JPanel;
 
 public class RockPaperScissors extends JPanel implements ActionListener{
     //2. create an object of the Random class
-    
+    Random roshambo=new Random();
+
     JFrame window = new JFrame("Rock Paper Scissors");
     JButton rockButton = new JButton();
     JButton paperButton = new JButton();
@@ -30,14 +31,14 @@ public class RockPaperScissors extends JPanel implements ActionListener{
     BufferedImage paperImage;
     BufferedImage scissorsImage;
     
-    Dimension buttonDim = new Dimension(300, 200);
+    Dimension buttonDim = new Dimension(480, 620);
     
     public void run(){
         URL url;
         try {
             //1. On the internet, find a picture of a rock, some paper, and scissors. Replace the 
             //   strings below with the URL to your image
-            rockImage = ImageIO.read(new URL("http://www.drodd.com/images14/x19.jpg"));  
+            rockImage = ImageIO.read(new URL("http://shop.wwe.com/on/demandware.static/-/Sites/default/dw29757933/images/slot/landing/superstar-landing/Superstar-Category_Superstar_562x408_theRock.png"));  
             paperImage = ImageIO.read(new URL("http://www.drodd.com/images14/x19.jpg")); 
             scissorsImage = ImageIO.read(new URL("http://www.drodd.com/images14/x19.jpg")); 
         } catch (MalformedURLException ex) {
@@ -58,7 +59,7 @@ public class RockPaperScissors extends JPanel implements ActionListener{
         paperButton.setPreferredSize(buttonDim);
         scissorsButton.setPreferredSize(buttonDim);
         
-        instructionLabel.setText("Choose Your Weapon!");
+        instructionLabel.setText("Rock? Papers? Scissors?");
         
         add(instructionLabel);
         add(rockButton);
@@ -77,7 +78,8 @@ public class RockPaperScissors extends JPanel implements ActionListener{
         
         
         //3. fix the next line so that the opponent's selection is random
-        int opponentSelection = 0;
+        int q= roshambo.nextInt(3);
+        int opponentSelection = q;
         
         if(e.getSource() == paperButton){
             selection = 1;
@@ -94,12 +96,13 @@ public class RockPaperScissors extends JPanel implements ActionListener{
                  (selection == 2 && opponentSelection == 1)){
             JOptionPane.showMessageDialog(null, "You Win!");
         }else{
-            JOptionPane.showMessageDialog(null, "You Lose!");
+            JOptionPane.showMessageDialog(null, "Try Again!");
         }
     }
     
+    
     private String convertSelection(int s){
-        switch(s){
+        switch(s){ 
             case 0: return "ROCK";
             case 1: return "PAPER";
             case 2: return "SCISSORS";
